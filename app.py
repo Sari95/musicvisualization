@@ -24,7 +24,7 @@ sp_oauth = SpotifyOAuth(
 st.title("🎵 Dein persönlicher Spotify-Jahresrückblick")
 
 # 1. URL-Parameter auslesen (z.B. ?code=...)
-query_params = st.query_params
+query_params = st.experimental_get_query_params()
 code = query_params.get("code")
 
 # 2. Wenn wir keinen Token im Session State haben, versuchen wir, ihn mit dem Code zu holen
@@ -34,7 +34,7 @@ if "token_info" not in st.session_state:
         token_info = sp_oauth.get_access_token(code[0], as_dict=True)
         st.session_state["token_info"] = token_info
         # Nach erfolgreichem Token-Austausch Redirect machen, um Query-Parameter zu entfernen
-        st.set_query_params(**{})
+        st.experimental_set_query_params()
     else:
         token_info = None
 else:
