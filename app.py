@@ -34,7 +34,7 @@ if "token_info" not in st.session_state:
         token_info = sp_oauth.get_access_token(code[0], as_dict=True)
         st.session_state["token_info"] = token_info
         # Nach erfolgreichem Token-Austausch Redirect machen, um Query-Parameter zu entfernen
-        st.set_query_params()
+        st.set_query_params(**{})
     else:
         token_info = None
 else:
