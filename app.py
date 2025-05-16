@@ -1,18 +1,12 @@
 import streamlit as st
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-import pandas as pd
-import plotly.express as px
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
 
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     scope="user-top-read",
-    client_id=os.getenv("SPOTIPY_CLIENT_ID"),
-    client_secret=os.getenv("SPOTIPY_CLIENT_SECRET"),
-    redirect_uri=os.getenv("SPOTIPY_REDIRECT_URI")
+    client_id=st.secrets["SPOTIPY_CLIENT_ID"],
+    client_secret=st.secrets["SPOTIPY_CLIENT_SECRET"],
+    redirect_uri=st.secrets["SPOTIPY_REDIRECT_URI"]
 ))
 
 st.title("🎵 Dein persönlicher Spotify-Jahresrückblick")
